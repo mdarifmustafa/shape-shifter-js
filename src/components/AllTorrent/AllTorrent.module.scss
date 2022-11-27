@@ -1,0 +1,17 @@
+.container {
+  @apply fixed flex items-center justify-center inset-0 bg-white z-10
+}
+
+.loader {
+  @apply w-8 h-8 relative rounded-full text-primary animate-fill
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  @apply absolute h-full w-full top-0 left-12 animate-fill rounded-full
+}
+
+.loader::after {
+  @apply left-auto right-12 duration-1000
+}

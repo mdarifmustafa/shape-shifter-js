@@ -1,0 +1,38 @@
+.header:global(.MuiGrid-root) {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  place-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.header {
+  box-shadow: 0 0 0.10rem 0 #e7e7e7;
+  margin-block-end: 0.25rem;
+}
+
+.gridItem:global(.MuiGrid-root.MuiGrid-item) {
+  height: inherit;
+  display: grid;
+  place-items: center;
+}
+
+.joyModalStack:global(.JoyModal-root) {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.joyModalRoot:global(.JoyModalDialog-root) {
+  box-shadow: -1px -1px 1px 1px rgba(#999, 0.5), 1px 1px 1px 1px rgba(#999, 0.5);
+}
+
+.joyInputRootClass:global(.JoyInput-root.Joy-focused) {
+  outline: none;
+}
+
+.joySubmitButton:global(.JoyButton-root.JoyButton-variantOutlined:hover) {
+  color: #006;
+  font-weight: bolder;
+  background-color: #fff;
+}
+

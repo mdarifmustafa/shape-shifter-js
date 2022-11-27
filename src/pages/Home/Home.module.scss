@@ -1,0 +1,13 @@
+.tabText:global(.MuiButtonBase-root.MuiTab-root) {
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.tabsIndicatorColor > div > :global(span.MuiTabs-indicator) {
+  background-color: #fff;
+}
+
+.tabPanelHeight:global([role^="tabpanel"]) {
+  color: #010122;
+  min-height: calc(100vh - 100px);
+}
