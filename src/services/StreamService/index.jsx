@@ -1,6 +1,5 @@
 import { StoreContext } from "@context"
-import { useEffect, useContext } from "react"
-import { EnumTorrentStatus } from "@utils"
+import { useEffect, useContext, useState } from "react"
 
 export const StreamService = () => {
   const { torrents, setTorrents } = useContext(StoreContext)
@@ -22,6 +21,10 @@ export const StreamService = () => {
   const initWorker = (torrent) => {
     streamWorkerInstance.postMessage(torrent)
   }
+
+  useEffect(() => {
+  }, [])
+
 
   useEffect(() => {
     if (torrents.length) {

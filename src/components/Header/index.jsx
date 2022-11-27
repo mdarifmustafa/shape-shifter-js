@@ -1,10 +1,18 @@
-import { Fragment, useState, useRef, useEffect, useContext } from "react"
+import {
+  Fragment,
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  memo,
+} from "react"
 import styles from "./Header.module.scss"
-import { Grid, ClickAwayListener } from "@mui/material"
+import { Grid } from "@mui/material"
 import { MagnetLight } from "@assets/images"
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined"
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined"
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"
+import HomeIcon from "@mui/icons-material/Home"
 
 import Button from "@mui/joy/Button"
 import TextField from "@mui/joy/TextField"
@@ -15,20 +23,23 @@ import Typography from "@mui/joy/Typography"
 import { StoreContext } from "@context"
 import { TorrentModel } from "@models"
 import { v4 as uuidv4 } from "uuid"
+import { useNavigate } from "react-router-dom"
 
 // const getClipboardDefaultValue = () => {
 //   return "http://torrent.unix-ag.uni-kl.de/"
 // }
 
-export const Header = () => {
+const Header = () => {
   const [inputOpen, setInputOpen] = useState(false)
   const [inputValue, setInputValue] = useState(
     "http://torrent.unix-ag.uni-kl.de/"
   )
 
   const dialogInputRef = useRef(null)
+  const { torrents, setTorrents, pageView, setPageView } =
+    useContext(StoreContext)
 
-  const { torrents, setTorrents } = useContext(StoreContext)
+  const navigate = useNavigate()
 
   const hideInputModal = () => {
     setInputOpen(false)
@@ -128,6 +139,15 @@ export const Header = () => {
     )
   }
 
+  const routeToPage = (
+    e,
+    page
+  ) => {
+    e.stopPropagation()
+    setPageView(page)
+    navigate(`/${page}`)
+  }
+
   return (
     <Grid container className={styles.header}>
       <Grid item xs={1} className={styles.gridItem}>
@@ -152,8 +172,19 @@ export const Header = () => {
         </Fragment>
       </Grid>
       <Grid item xs={2} className={styles.gridItem}>
-        <SearchOutlinedIcon />
+        {pageView === "search" && (
+          <HomeIcon onClick={(e) => routeToPage(e, "home")} />
+        )}
+        {(pageView === "home" || pageView === "") && (
+          <SearchOutlinedIcon
+            onClick={(e) =>
+              routeToPage(e, "search")
+            }
+          />
+        )}
       </Grid>
     </Grid>
   )
 }
+
+export default memo(Header)

@@ -13,31 +13,36 @@ import { StreamService } from "@services/StreamService"
 
 const queryClient = new QueryClient()
 
-export const StoreContext = createContext({})
+export const StoreContext = createContext(
+  {}
+)
 
 export const StoreProviders = ({ children }) => {
   const [pageView, setPageView] = useState("home")
   const [tabViewIndex, setTabViewIndex] = useState(0)
   const [torrents, setTorrents] = useState([])
+  const [searchValue, setSearchValue] = useState("")
 
-  const buildProviderValue = {
+  const buildProviderValues = {
     pageView: pageView,
     setPageView: setPageView,
     tabViewIndex: tabViewIndex,
     setTabViewIndex: setTabViewIndex,
     torrents: torrents,
     setTorrents: setTorrents,
+    searchValue: searchValue,
+    setSearchValue: setSearchValue,
   }
 
   useEffect(() => {
-    console.log("torrents useEffects are:", torrents)
-  }, [torrents])
+    console.log("torrents useEffects are:", torrents, pageView)
+  }, [torrents, pageView])
 
   return (
     <Suspense fallback={<Loader />}>
       <QueryClientProvider client={queryClient}>
         <ConfigProvider direction={"ltr"}>
-          <StoreContext.Provider value={buildProviderValue}>
+          <StoreContext.Provider value={buildProviderValues}>
             <BrowserRouter>{children}</BrowserRouter>
             <StreamService />
             {import.meta.env.DEV && import.meta.env.VITE_ENABLE_DEVTOOL && (

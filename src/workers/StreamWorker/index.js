@@ -1,6 +1,5 @@
 
-
-const streamWorker = globalThis;
+const streamWorker = globalThis
 
 const stream = (torrent) => {
   var constructTorrent = { ...torrent }
@@ -11,5 +10,6 @@ const stream = (torrent) => {
 const tixati = (torrent) => stream(torrent)
 
 streamWorker.onmessage = (e) => {
+  console.log("tixati e.data is:", e.data)
   tixati(e.data)
 }
